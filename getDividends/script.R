@@ -6,3 +6,6 @@ tab <- h %>% html_nodes("table")
 table <- tab %>% html_table(fill = TRUE)
 tabledf <- data.frame(table)
 tabledf <- tabledf[1:21,1:2]
+dates <- tabledf[,1]
+dividends <-gsub(" .*$","",tabledf[,2])
+dividends <- as.numeric(dividends)
