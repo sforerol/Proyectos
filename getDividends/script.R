@@ -1,7 +1,15 @@
 library(tidyverse)
 library(rvest)
 library("writexl")
-url <- "https://finance.yahoo.com/quote/GE/history?period1=1448668800&period2=1606521600&interval=div%7Csplit&filter=div&frequency=1d&includeAdjustedClose=true"
+segment1 <- "https://finance.yahoo.com/quote/"
+segment2 <- "/history?period1="
+segment3 <- "&period2="
+segment4 <- "&interval=div%7Csplit&filter=div&frequency=1d&includeAdjustedClose=true"
+
+symbol <- "xLV"
+initialDate <- as.character(as.numeric(as.POSIXct("2015-11-28 0:00:00 EST")))
+finalDate <- as.character(as.numeric(as.POSIXct("2020-11-28 0:00:00 EST")))
+url <- gsub(" ", "", paste(segment1,symbol,segment2,initialDate,segment3,finalDate,segment4)) 
 h <- read_html(url)
 tab <- h %>% html_nodes("table")
 table <- tab %>% html_table(fill = TRUE)
