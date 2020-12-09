@@ -10,7 +10,6 @@ tabledf <- tabledf[1:21,1:2]
 dates <- tabledf[,1]
 dividends <-gsub(" .*$","",tabledf[,2])
 dividends <- as.numeric(dividends)
-exportTable <- merge(dates,dividends)
-names(exportTable)[1] <- paste("Dates")
-names(exportTable)[2] <- paste("Dividends")
+exportTable <- data.frame(Dates = dates, Dividends = dividends)
+
 
