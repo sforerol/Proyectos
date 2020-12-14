@@ -1,3 +1,4 @@
+arg <- commandArgs(trailingOnly = TRUE)
 library(tidyverse)
 library(rvest)
 library("writexl")
@@ -5,10 +6,9 @@ segment1 <- "https://finance.yahoo.com/quote/"
 segment2 <- "/history?period1="
 segment3 <- "&period2="
 segment4 <- "&interval=div%7Csplit&filter=div&frequency=1d&includeAdjustedClose=true"
-
-symbol <- "xLV"
-initialDate <- as.character(as.numeric(as.POSIXct("2015-11-28 0:00:00 EST")))
-finalDate <- as.character(as.numeric(as.POSIXct("2020-11-28 0:00:00 EST")))
+initialDate <- as.character(as.numeric(as.POSIXct(arg[1])))
+finalDate <- as.character(as.numeric(as.POSIXct(arg[2])))
+symbol <- arg[3]
 url <- gsub(" ", "", paste(segment1,symbol,segment2,initialDate,segment3,finalDate,segment4)) 
 h <- read_html(url)
 tab <- h %>% html_nodes("table")
